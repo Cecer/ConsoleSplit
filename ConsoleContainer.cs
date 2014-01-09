@@ -22,12 +22,12 @@ namespace Cecer.ConsoleSplit
         }
         private ConsoleContainer(int width, int height)
         {
-            Console.WindowWidth = width;
-            Console.BufferWidth = width;
-
-            Console.WindowHeight = height;
-            Console.BufferHeight = height;
+            Console.SetWindowPosition(0, 0);
+            Console.SetWindowSize(1, 1); // Ensure the buffer size is never smaller than the new window size.
+            Console.SetBufferSize(width, height); // Set the buffer size first to keep it bigger than the window
+            Console.SetWindowSize(width, height); // Match the buffer size to the window size.
         }
+
         public static ConsoleContainer Initialize(int width, int height)
         {
             if(_instance != null)
